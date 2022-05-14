@@ -32,7 +32,7 @@
   - single blog view
   - entry add/edit/create view
 
-The most important part of the task is to make sure the user interface behaves correctly, e.g.:
+## The most important part of the task is to make sure the user interface behaves correctly, e.g.:
 - You cannot create a user without an id or with id similar to an existing one
 - You cannot confirm creating a blog entry if not all mandatory data is filled in
 - If list of entries is empty, "remove" button is disabled
