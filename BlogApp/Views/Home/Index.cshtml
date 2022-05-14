@@ -1,0 +1,68 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using BlogApp.Areas.Identity.Data
+@model IEnumerable<BlogApp.Models.BlogEntry>
+
+@{
+    ViewData["Title"] = "Blogs";
+}
+
+<partial name="_Notification" />
+
+<h1>Blogs</h1>
+<br />
+<br />
+@if(@User.Identity.Name!=null)
+{
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+}
+@if(@Model.Count()==0)
+{
+    <h2>No Blogs were yet created! Register or login to create a Blog!</h2>
+}
+<table class="table table-bordered table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+                Author
+            </th>
+            <th>
+                Last Edited
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Title)</a>
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(modelItem => item.ownerId)
+            </td>
+            <td style="width:15%">
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            
+                @if (@item.ownerId == @User.Identity.Name)
+                {
+                 <td style="width:10%; text-align:center; vertical-align:middle">
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                 </td>
+                }
+                 @if (@item.ownerId != @User.Identity.Name)
+                 {
+                    <td style="width:10%; text-align: center; vertical-align:middle">
+                        <a asp-action="Details" asp-route-id="@item.Id">View</a>
+                    </td>
+                 }
+        </tr>
+}
+    </tbody>
+</table>

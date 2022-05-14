@@ -1,0 +1,28 @@
+﻿@model BlogApp.Models.BlogEntry
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Title)</h1>
+
+<div>
+    <hr />
+    <pre>@Html.DisplayFor(model => model.content)</pre>
+    <br />
+    <br />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Author
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.ownerId)
+        </dd>
+        <dt class = "col-sm-2">
+            Last Edited
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CreatedDate)
+        </dd>
+    </dl>
+</div>

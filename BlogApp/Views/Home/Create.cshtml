@@ -1,0 +1,45 @@
+﻿@model BlogApp.Models.BlogEntry
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (User.Identity.Name != null)
+{
+    <h1>Create Blog Entry</h1>
+
+    <hr />
+    <div class="row">
+        <div class="col-md">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Title" class="control-label"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="content" class="control-label"></label>
+                    <textarea asp-for="content" class="form-control" rows="13" name="content"></textarea>
+                    <span asp-validation-for="content" class="text-danger"></span>
+                </div>
+                <div class="form-group pt-2">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Blogs</a>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ownerId" style="padding-top:500px" 
+                class="control-label">Pointless field, but if deleted or given hidden attribute, can't pass ModelState.IsValid. Sorry, and advice appreciated</label>
+                    <input asp-for="ownerId" class="form-control" readonly value="tmp" />
+                </div>
+            </form>
+        </div>
+    </div>
+}
+@if (User.Identity.Name == null)
+{
+    <h1>ACCESS UNAUTHORISED </h1>
+}
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
